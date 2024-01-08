@@ -6,7 +6,7 @@ import { useFonts } from 'expo-font';
 import { StatusBar, Text } from 'react-native';
 import React from 'react';
 import Loader from './screens/loader';
-import { AuthProvider } from './app/context/AuthContext';
+import { AuthProvider, useAuth } from './app/context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
