@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
