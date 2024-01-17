@@ -6,12 +6,16 @@ import { useFonts } from 'expo-font';
 import { StatusBar, Text } from 'react-native';
 import React from 'react';
 import Loader from './screens/loader';
+import { AuthProvider, useAuth } from './app/context/AuthContext';
+import { MainApp } from './screens/MainApp';
 
 const Stack = createNativeStackNavigator();
 
 const Index = () => {
 
   let [fontsLoaded, setFontsLoaded] = React.useState(false)
+
+  const { authState, onLogout } = useAuth()
 
   const [loading] = useFonts({
     "Cabin-Regular": require('./assets/fonts/Cabin-Regular.ttf'),
@@ -36,7 +40,7 @@ const Index = () => {
         }, 1500);
       });
     };
-     loadFonts().then(() => {
+    loadFonts().then(() => {
       setFontsLoaded(true)
     })
 
@@ -57,14 +61,17 @@ const Index = () => {
           gestureEnabled: false,
         }}
       >
-        <Stack.Screen
-          name='SignIn'
-          component={SignIn}
-        />
-        <Stack.Screen
-          name='SignUp'
-          component={SignUp}
-        />
+        <Stack.Group>
+          <Stack.Screen
+            name='SignIn'
+            component={SignIn}
+          />
+          <Stack.Screen
+            name='SignUp'
+            component={SignUp}
+          />
+        </Stack.Group>
+        <Stack.Screen name="Home" component={MainApp}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -72,9 +79,11 @@ const Index = () => {
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <Index />
-    </NativeBaseProvider>
+    <AuthProvider>
+      <NativeBaseProvider>
+        <Index />
+      </NativeBaseProvider>
+    </AuthProvider>
   );
 }
 

@@ -63,7 +63,7 @@ const SignIn = ({ navigation }) => {
                     <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
                             <Text style={styles.textLink}>Забули пароль?</Text>
                     </TouchableOpacity>
-                    <Button size="lg" _text={styles.buttonText} variant="unstyled" style={styles.button}>
+                    <Button size="lg" _text={styles.buttonText} variant="unstyled" style={styles.button} onPress={() => navigation.navigate("Home")}>
                         Продовжити
                     </Button>
                 </Stack>

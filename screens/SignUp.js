@@ -12,9 +12,10 @@ import ShowIcon from '../assets/icons/ShowIcon'
 import RightLine from '../assets/icons/RightLine'
 import LeftLine from '../assets/icons/LeftLine'
 import LockIcon from '../assets/icons/LockIcon'
+import { SuccessSplash } from '../splashes/successSplash'
 
 
-const SignIn = ({navigation}) => {
+const SignIn = ({ navigation }) => {
 
     const [showPass, setShowPass] = React.useState(false)
     const [accepted, setAccepted] = React.useState(false)
@@ -22,6 +23,12 @@ const SignIn = ({navigation}) => {
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+
+    const [showModal, setShowModal] = React.useState(false)
+
+    const handleModalOpen = () => {
+        setShowModal(true)
+    }
 
 
     return (
@@ -52,7 +59,7 @@ const SignIn = ({navigation}) => {
                         autoComplete='name'
                         borderColor={COLORS.black}
                         placeholderTextColor={COLORS.black}
-                        onChange={(e) => setName(e.nativeEvent.text) }
+                        onChange={(e) => setName(e.nativeEvent.text)}
                         value={name}
                     />
                     <Input
@@ -67,7 +74,7 @@ const SignIn = ({navigation}) => {
                         autoComplete='email'
                         borderColor={COLORS.black}
                         placeholderTextColor={COLORS.black}
-                        onChange={(e) => setEmail(e.nativeEvent.text) }
+                        onChange={(e) => setEmail(e.nativeEvent.text)}
                         value={email}
                     />
                     <Input
@@ -83,11 +90,11 @@ const SignIn = ({navigation}) => {
                         autoComplete='password'
                         borderColor={COLORS.black}
                         placeholderTextColor={COLORS.black}
-                        onChange={(e) => setPassword(e.nativeEvent.text) }
+                        onChange={(e) => setPassword(e.nativeEvent.text)}
                         value={password}
                     />
                     <Checkbox size="sm" colorScheme="red" borderColor={COLORS.red} value={accepted} onChange={setAccepted} style={{ marginLeft: 10 }}><Text style={styles.checkboxText}> Прийміть положення та умови </Text></Checkbox>
-                    <Button size="lg" _text={styles.buttonText} variant="unstyled" style={styles.button} isDisabled={!accepted}>
+                    <Button size="lg" _text={styles.buttonText} variant="unstyled" style={styles.button} isDisabled={!accepted} onPress={handleModalOpen}>
                         Продовжити
                     </Button>
                 </Stack>
@@ -160,6 +167,7 @@ const SignIn = ({navigation}) => {
                     <Text style={styles.footerText}>Вже маєте обліковий запис у нас?</Text>
                     <TouchableOpacity onPress={() => navigation.navigate("SignIn")}><Text style={styles.footerTextLink}>Увійти</Text></TouchableOpacity>
                 </Box>
+                <SuccessSplash modalVisible={showModal} setModalVisible={setShowModal} />
             </Box>
         </TouchableWithoutFeedback>
     )
